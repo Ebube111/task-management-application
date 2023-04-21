@@ -9,7 +9,12 @@ import {
   taskStateLabel,
 } from "../../@types.tasks";
 
-export const EditTask = () => {
+/**
+ * Edit component allows users to edit a existing task.
+ * @returns {JSX.Element} - The EditTask component.
+ */
+
+export const EditTask = (): JSX.Element => {
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
   const [status, setStatus] = useState<TaskStateType>("toDo");
@@ -24,8 +29,15 @@ export const EditTask = () => {
     }
   }, [selectedTask]);
 
+  /**
+   * Cancels the current Edit session and returns user back to homepage.
+   */
   const handleCancelEdit = () => setSelectedTask(undefined);
 
+  /**
+   * Handles the editing a task.
+   * @param {Object} event - The event object triggered by the form submission.
+   */
   const handleEditTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!updatedTitle && !updatedDescription) {
@@ -61,7 +73,7 @@ export const EditTask = () => {
   };
 
   if (!selectedTask) {
-    return null;
+    return <div></div>;
   }
 
   return (

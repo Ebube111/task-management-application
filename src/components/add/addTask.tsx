@@ -3,10 +3,20 @@ import { ITask } from "../../@types.tasks";
 import { TaskContext } from "../context/TaskContext";
 import PlusIcon from "../../assets/white-plus-icon.svg";
 
+/**
+ * AddTask component allows users to create a new task.
+ * @returns {JSX.Element} - The AddTask component.
+ */
+
 export const AddTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { tasks, setTasks } = useContext(TaskContext);
+
+  /**
+   * Handles the creation of a new task.
+   * @param {Object} event - The event object triggered by the form submission.
+   */
 
   const handleCreateTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
