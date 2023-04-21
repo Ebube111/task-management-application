@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { TaskContext } from "../context/TaskContext";
-import { AddTask } from "..";
+import { AddTask } from "../add/addTask";
 import { ITask } from "../../@types.tasks";
 
 test("clicking add button creates a new task", () => {
@@ -18,6 +18,11 @@ test("clicking add button creates a new task", () => {
     </TaskContext.Provider>
   );
 
+  // Use a fixed value for the ID
+  const mockDateNow = jest
+    .spyOn(Date, "now")
+    .mockImplementation(() => 123456789);
+
   const titleInput = screen.getByPlaceholderText("Title");
   const descriptionInput = screen.getByPlaceholderText("Description");
   const addButton = screen.getByRole("button", { name: /add/i });
@@ -28,10 +33,12 @@ test("clicking add button creates a new task", () => {
 
   expect(setTasks).toHaveBeenCalledWith([
     {
-      id: 1,
+      id: 123456789,
       title: "Test Task",
       description: "Test Description",
       status: "toDo",
     },
   ]);
+
+  mockDateNow.mockRestore();
 });

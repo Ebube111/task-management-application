@@ -5,7 +5,8 @@ const config: Config.InitialOptions = {
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '\\.svg$': '<rootDir>/__mocks__/fileMock.js',
+    '\\.svg$': '<rootDir>/__mocks__/styleMock.js',
+    "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js"
   },
   testMatch: [
     '**/__tests__/**/*.+(ts|tsx|js)',
