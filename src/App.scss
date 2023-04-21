@@ -51,15 +51,15 @@ textarea {
 }
 
 .app-header {
+  display: flex;
   background: var(--primary-color);
+  align-items: center;
+  justify-content: center;
+  height: 50px;
   .header-text {
     color: var(--default);
     font-size: 25px;
     font-weight: 700;
-    height: 50px;
-    align-items: center;
-    padding-left: 50px;
-    display: flex;
   }
 }
 

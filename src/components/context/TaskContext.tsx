@@ -1,17 +1,17 @@
 import React, { createContext, useState, ReactNode } from "react";
-import { ITask, TaskState } from "../../@types.tasks";
+import { ITask } from "../../@types.tasks";
 
 type TodoContextType = {
   tasks: ITask[];
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-  selectedTask: object;
-  setSelectedTask: React.Dispatch<React.SetStateAction<object>>;
+  selectedTask: ITask | undefined;
+  setSelectedTask: React.Dispatch<React.SetStateAction<ITask | undefined>>;
 };
 
 export const TaskContext = createContext<TodoContextType>({
   tasks: [],
   setTasks: () => null,
-  selectedTask: {},
+  selectedTask: undefined,
   setSelectedTask: () => null,
 });
 
@@ -20,7 +20,7 @@ type TodoProviderProps = {
 };
 
 export const TaskProvider = ({ children }: TodoProviderProps) => {
-  const [selectedTask, setSelectedTask] = useState({});
+  const [selectedTask, setSelectedTask] = useState<ITask>();
   const [tasks, setTasks] = useState<ITask[]>([]);
 
   return (

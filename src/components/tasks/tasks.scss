@@ -34,11 +34,14 @@
         flex-direction: row;
         position: relative;
         padding: 30px;
-        // margin-top: 20px;
 
         align-items: flex-start;
         justify-content: space-between;
         flex-wrap: wrap;
+        @media screen and (max-width: 600px) {
+                max-height: 23rem;
+                min-height: 23rem;
+        }
     }
     .no-task {
         position: absolute;

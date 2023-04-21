@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ITask } from "../../@types.tasks";
+import { ITask, TaskStateType, taskStateLabel } from "../../@types.tasks";
 import EditIcon from "../../assets/edit-icon.svg";
 import "./taskCard.scss";
 import { TaskContext } from "../context/TaskContext";
@@ -7,7 +7,7 @@ import { TaskContext } from "../context/TaskContext";
 const TaskCard = ({ title, description, status, id }: ITask) => {
   const { setSelectedTask } = useContext(TaskContext);
 
-  const truncateText = (text: string, maxCharacters = 80) => {
+  const truncateText = (text: string, maxCharacters = 70) => {
     if (text?.length > maxCharacters) {
       return text.substring(0, maxCharacters) + "...";
     } else return text;
@@ -29,7 +29,9 @@ const TaskCard = ({ title, description, status, id }: ITask) => {
         <span>{truncateText(description)}</span>
       </div>
       <div className="task-card-footer">
-        <button className="card-button">{status}</button>
+        <button className="card-button">
+          {taskStateLabel[status as TaskStateType]}
+        </button>
         <img onClick={handleSelectTask} alt="" src={EditIcon} />
       </div>
     </div>

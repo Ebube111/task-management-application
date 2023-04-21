@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { ITask, TaskState } from "../../@types.tasks";
+import { ITask } from "../../@types.tasks";
 import { TaskContext } from "../context/TaskContext";
 import PlusIcon from "../../assets/white-plus-icon.svg";
 
@@ -14,10 +14,10 @@ export const AddTask = () => {
       return alert("Title and description are required fields");
     }
     const newTask: ITask = {
-      id: tasks.length + 1,
+      id: Date.now(),
       title,
       description,
-      status: TaskState.Todo,
+      status: "toDo",
     };
     setTasks([...tasks, newTask]);
     setTitle("");

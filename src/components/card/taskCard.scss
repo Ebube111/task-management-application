@@ -28,7 +28,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        min-width: 90%;
+        width: 100%;
         margin-bottom: 20px;
         img {
             width: 35px;
@@ -51,6 +51,7 @@
     @media  screen and (max-width: 600px) {
     
             width: 145px;    
+            padding: 7px;
             height: 165px;
             .task-card-text-section {
                 h1 {

@@ -2,24 +2,29 @@ import { useContext, useEffect, useState } from "react";
 import "./editTask.scss";
 import { TaskContext } from "../context/TaskContext";
 import EditIcon from "../../assets/edit-icon-white.svg";
-import { ITask, TaskState } from "../../@types.tasks";
+import {
+  ITask,
+  TaskStateType,
+  allowedStatusChange,
+  taskStateLabel,
+} from "../../@types.tasks";
 
 export const EditTask = () => {
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
-  const [status, setStatus] = useState(TaskState.Todo);
+  const [status, setStatus] = useState<TaskStateType>("toDo");
   const { setSelectedTask, selectedTask, tasks, setTasks } =
     useContext(TaskContext);
 
   useEffect(() => {
     if (selectedTask) {
-      setUpdatedTitle(selectedTask?.title);
-      setUpdatedDescription(selectedTask?.description);
-      setStatus(selectedTask?.status);
+      setUpdatedTitle(selectedTask.title);
+      setUpdatedDescription(selectedTask.description);
+      setStatus(selectedTask.status);
     }
   }, [selectedTask]);
 
-  const handleCancelEdit = () => setSelectedTask({});
+  const handleCancelEdit = () => setSelectedTask(undefined);
 
   const handleEditTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,12 +39,12 @@ export const EditTask = () => {
         description: updatedDescription,
         status,
       };
-      if (status === TaskState.Done) {
+      if (status === "done") {
         const deleteTask = tasks.filter((task) => task.id !== selectedTask.id);
         setTasks(deleteTask);
         setUpdatedDescription("");
         setUpdatedTitle("");
-        setSelectedTask({});
+        setSelectedTask(undefined);
         return;
       }
 
@@ -50,10 +55,14 @@ export const EditTask = () => {
       setTasks(updateExistingTask);
       setUpdatedDescription("");
       setUpdatedTitle("");
-      setStatus(TaskState.Todo);
-      setSelectedTask({});
+      setStatus("toDo");
+      setSelectedTask(undefined);
     }
   };
+
+  if (!selectedTask) {
+    return null;
+  }
 
   return (
     <div className="update-task-container">
@@ -75,26 +84,19 @@ export const EditTask = () => {
           />
           <select
             value={status}
-            onChange={(event) => setStatus(event.target.value)}
+            onChange={(event) => setStatus(event.target.value as TaskStateType)}
             className="dropdown-options"
           >
-            <option className="select-option" value={TaskState.Todo}>
-              ToDo
-            </option>
-            <option className="select-option" value={TaskState.InProgress}>
-              inProgress
-            </option>
-            <option className="select-option" value={TaskState.InQa}>
-              inQA
-            </option>
-            <option className="select-option" value={TaskState.Done}>
-              Done
-            </option>
+            {allowedStatusChange[selectedTask.status].map((state, index) => (
+              <option key={index} className="select-option" value={state}>
+                {taskStateLabel[state as TaskStateType]}
+              </option>
+            ))}
           </select>
           <div className="edit-buttons">
             <button type="submit" className="edit-button">
               <img src={EditIcon} alt="" className="edit-icon" />
-              <span>{status === TaskState.Done ? "Completed" : "Edit"}</span>
+              <span>{status === "done" ? "Completed" : "Edit"}</span>
             </button>
             <button onClick={handleCancelEdit} className="cancel-button">
               Cancel
