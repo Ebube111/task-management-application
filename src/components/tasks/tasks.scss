@@ -1,0 +1,42 @@
+.tasks-container {
+    width: 100%;
+    padding: 0;
+    background-color: var(--primary-color);
+    border-top-right-radius: 26px;
+    border-top-left-radius: 26px;
+    h1 {
+        color: var(--default);
+        padding-left: 40px;
+        padding-top: 15px;
+    }
+
+    .task-inner-container {
+        background: var(--secondary-color);
+        border-top-right-radius: 26px;
+        border-top-left-radius: 26px;
+        .no-task {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: 35rem;
+            span {
+                font-size: 25px;
+                font-weight: 500;
+            }
+        }
+    }
+    .tasks-contents {
+        display: flex;
+        overflow-x: scroll;
+        max-height: 35rem;
+        flex-direction: row;
+        overflow-x: scroll;
+        padding-top: 10px;
+        padding: 15px;
+        margin-top: 20px;
+
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
