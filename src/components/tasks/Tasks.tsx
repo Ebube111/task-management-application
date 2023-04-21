@@ -26,7 +26,7 @@ export const Tasks = () => {
             </>
           ) : (
             <div className="no-task">
-              <span>You have nothing to do, go get some sleep</span>
+              <span>You have nothing to do. go get some sleep</span>
             </div>
           )}
         </div>

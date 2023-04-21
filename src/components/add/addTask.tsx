@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { ITask, TaskState } from "../../@types.tasks";
 import { TaskContext } from "../context/TaskContext";
+import PlusIcon from "../../assets/white-plus-icon.svg";
 
 export const AddTask = () => {
   const [title, setTitle] = useState("");
@@ -10,7 +11,7 @@ export const AddTask = () => {
   const handleCreateTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!title || !description) {
-      return alert("Please title or description cannot be empty");
+      return alert("Title and description are required fields");
     }
     const newTask: ITask = {
       id: tasks.length + 1,
@@ -41,7 +42,8 @@ export const AddTask = () => {
             placeholder="Description"
           />
           <button type="submit" className="add-button">
-            Add
+            <img src={PlusIcon} alt="" className="plus-icon" />
+            <span>Add</span>
           </button>
         </form>
       </div>

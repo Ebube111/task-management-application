@@ -1,7 +1,7 @@
 .task-card-container {
-    max-width: 210px;
-    min-width: 210px;
-    height: 240px;
+    max-width: 200px;
+    width: 200px;
+    height: 210px;
     background-color: var(--default);
     margin-bottom: 30px;
     padding: 10px;
@@ -15,10 +15,10 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        // padding: 13px;
+        width: 100%;
+        justify-content: flex-start;
         h1 {
             padding: 0;
-            margin: 10px 5px 15px 10px;
             color: var(--header-color);
             align-self: flex-start;
         }
@@ -28,10 +28,11 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        min-width: 80%;
+        min-width: 90%;
         margin-bottom: 20px;
         img {
             width: 35px;
+            height: 28px;
             cursor: pointer;
         }
         button {
@@ -47,4 +48,27 @@
             border: none;
         }
     }
+    @media  screen and (max-width: 600px) {
+    
+            width: 145px;    
+            height: 165px;
+            .task-card-text-section {
+                h1 {
+                    font-size: 16px;
+                }
+                span {
+                    font-size: 13px;
+                }
+            }
+            .task-card-footer {
+                img {
+                    width: 25px;
+                    height: 20px;
+                }
+                button {
+                    min-width: 70px;
+                    font-size: 14px;
+                }
+            }
+    } 
 }

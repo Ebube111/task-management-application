@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import "./editTask.scss";
 import { TaskContext } from "../context/TaskContext";
+import EditIcon from "../../assets/edit-icon-white.svg";
 import { ITask, TaskState } from "../../@types.tasks";
 
 export const EditTask = () => {
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
   const [status, setStatus] = useState(TaskState.Todo);
-  const { setSelectedTask, selectedTask, tasks } = useContext(TaskContext);
+  const { setSelectedTask, selectedTask, tasks, setTasks } =
+    useContext(TaskContext);
 
   useEffect(() => {
     if (selectedTask) {
@@ -32,12 +34,24 @@ export const EditTask = () => {
         description: updatedDescription,
         status,
       };
-      setSelectedTask(updatedTask);
-      // setTodos(updatedTodos);
-      // setSelectedTodo(null);
-      // setNewTitle("");
-      // setNewDescription("");
-      // setNewState("todo");
+      if (status === TaskState.Done) {
+        const deleteTask = tasks.filter((task) => task.id !== selectedTask.id);
+        setTasks(deleteTask);
+        setUpdatedDescription("");
+        setUpdatedTitle("");
+        setSelectedTask({});
+        return;
+      }
+
+      const updateExistingTask = tasks.map((task) =>
+        task.id === selectedTask.id ? updatedTask : task
+      );
+
+      setTasks(updateExistingTask);
+      setUpdatedDescription("");
+      setUpdatedTitle("");
+      setStatus(TaskState.Todo);
+      setSelectedTask({});
     }
   };
 
@@ -48,12 +62,12 @@ export const EditTask = () => {
           <h1>Edit Task</h1>
           <input
             value={updatedTitle}
-            onChange={(event) => setUpdatedDescription(event.target.value)}
+            onChange={(event) => setUpdatedTitle(event.target.value)}
             className="title-input"
             placeholder="Title"
           />
           <textarea
-            rows={30}
+            rows={25}
             className="description-input"
             value={updatedDescription}
             onChange={(event) => setUpdatedDescription(event.target.value)}
@@ -79,7 +93,8 @@ export const EditTask = () => {
           </select>
           <div className="edit-buttons">
             <button type="submit" className="edit-button">
-              Edit
+              <img src={EditIcon} alt="" className="edit-icon" />
+              <span>{status === TaskState.Done ? "Completed" : "Edit"}</span>
             </button>
             <button onClick={handleCancelEdit} className="cancel-button">
               Cancel

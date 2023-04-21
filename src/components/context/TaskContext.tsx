@@ -5,7 +5,7 @@ type TodoContextType = {
   tasks: ITask[];
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
   selectedTask: object;
-  setSelectedTask: React.Dispatch<React.SetStateAction<ITask | object>>;
+  setSelectedTask: React.Dispatch<React.SetStateAction<object>>;
 };
 
 export const TaskContext = createContext<TodoContextType>({
@@ -20,16 +20,8 @@ type TodoProviderProps = {
 };
 
 export const TaskProvider = ({ children }: TodoProviderProps) => {
-  const [selectedTask, setSelectedTask] = useState<ITask>({});
-  const [tasks, setTasks] = useState<ITask[]>([
-    {
-      id: 1,
-      status: TaskState.InProgress,
-      title: "Title goes here",
-      description:
-        "Task Description goes here, if text size is more than 3 paragraphs, it is trimed",
-    },
-  ]);
+  const [selectedTask, setSelectedTask] = useState({});
+  const [tasks, setTasks] = useState<ITask[]>([]);
 
   return (
     <TaskContext.Provider

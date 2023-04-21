@@ -1,10 +1,19 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  overflow: hidden;
+}
+textarea {
+  font-family: "Open Sans", sans-serif;
+}
+
 #root {
   max-width: 524px;
   margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
 
   /* CSS global variables */
   --primary-color: #1775b9;
+  --primary-color-hover: #245375;
   --secondary-color: #a2ceed;
   --default: #FFFFFF;
   --gray: #898888;
@@ -14,7 +23,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 20px;
+  width: 15px;
   padding: 30px;
   height: 10px;
 }
@@ -30,6 +39,11 @@
   background: #040707;
   border-radius: 26px;
 
+}
+
+/* Style the scrollbar corner */
+::-webkit-scrollbar-corner {
+  background-color: var(--secondary-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -88,15 +102,17 @@
   margin-bottom: 25px;
 }
 
-.title-input:active {
+.title-input:focus, .description-input:focus {
   outline: none;
   border: none;
+  border-bottom: 4px solid var(--primary-color);
 }
 
 .description-input {
   background: var(--input-bg);
   width: 420px;
   border: none;
+
   border-bottom: 1px solid var(--border-color);
   padding: 20px;
   margin-bottom: 25px;
@@ -109,7 +125,36 @@
   width: 100%;
   color: var(--default);
   height: 50px;
-  font-size: 20px;
-  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  border: none;
+  outline: none;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
   border-radius: 4px;
+  span {
+    font-size: 20px;
+    transition: 0.3s ease-in-out;
+    font-weight: 550;
+  }
+  .plus-icon {
+    margin-right: 10px;
+    width: 20px;
+    
+  }
 }
+
+.add-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+@media  screen and (max-width: 600px) {
+    .add-input-form {
+      .title-input, .description-input {
+
+        max-width: 300px;
+      }
+      
+    }
+} 

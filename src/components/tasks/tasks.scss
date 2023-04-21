@@ -18,7 +18,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            max-height: 35rem;
+            max-height: 24rem;
             span {
                 font-size: 25px;
                 font-weight: 500;
@@ -27,16 +27,26 @@
     }
     .tasks-contents {
         display: flex;
+        max-height: 24rem;
+        overflow-y: unset;
+        min-height: 24rem;
         overflow-x: scroll;
-        max-height: 35rem;
         flex-direction: row;
-        overflow-x: scroll;
-        padding-top: 10px;
-        padding: 15px;
-        margin-top: 20px;
+        position: relative;
+        padding: 30px;
+        // margin-top: 20px;
 
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         flex-wrap: wrap;
+    }
+    .no-task {
+        position: absolute;
+        top: 0;
+        margin: 0 7.5rem;
+        text-align: center;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 }
