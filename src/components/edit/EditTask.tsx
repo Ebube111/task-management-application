@@ -51,6 +51,7 @@ export const EditTask = (): JSX.Element => {
         description: updatedDescription,
         status,
       };
+      // If the task is marked as completed, Delete the tasks
       if (status === "done") {
         const deleteTask = tasks.filter((task) => task.id !== selectedTask.id);
         setTasks(deleteTask);
@@ -99,11 +100,18 @@ export const EditTask = (): JSX.Element => {
             onChange={(event) => setStatus(event.target.value as TaskStateType)}
             className="dropdown-options"
           >
-            {allowedStatusChange[selectedTask.status].map((state, index) => (
-              <option key={index} className="select-option" value={state}>
-                {taskStateLabel[state as TaskStateType]}
-              </option>
-            ))}
+            {
+              /**
+               * Display dropdown of different task status options
+               * ONLY display options that are allowed, meaning options that has been completed
+               * or advanced from cannot be displayed for that task.
+               */
+              allowedStatusChange[selectedTask.status].map((state, index) => (
+                <option key={index} className="select-option" value={state}>
+                  {taskStateLabel[state as TaskStateType]}
+                </option>
+              ))
+            }
           </select>
           <div className="edit-buttons">
             <button type="submit" className="edit-button">

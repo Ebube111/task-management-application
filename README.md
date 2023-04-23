@@ -8,7 +8,6 @@ To install this project, you must have Node.js and npm or yarn installed on your
 
 1. Clone the repository: git clone https://github.com/Ebube111/tasks-project.git.
 2. Move into the project directory:
-3. cd tasks-project.
 
 This project was initialized with yarn, it is recommended but not compulsory you do the same. - Install dependencies: run **_`yarn install`_**.
 
